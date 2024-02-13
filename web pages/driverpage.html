@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="CTB BUS Tracker">
+    <meta name="author" content="Group 01 - Networking Batch 03">
+    <meta property="og:title" content="CTB BUS Tracker">
+    <meta property="og:description" content="Track your CTB Bus in real-time!">
+    <meta property="og:image" content="https://www.milesight-iot.com/wp-content/uploads/2019/04/bus-tracking.png">
+    <meta name="twitter:title" content="CTB BUS Tracker">
+    <meta name="twitter:description" content="Track your CTB Bus in real-time!">
+    <meta name="twitter:image" content="https://www.milesight-iot.com/wp-content/uploads/2019/04/bus-tracking.png">
+    <meta property="og:title" content="CTB Tracking System">
+    <meta property="og:description"
+        content="Explore the CTB Bus Tracking System for real-time updates on bus locations.">
+    <meta property="og:image" content="https://www.milesight-iot.com/wp-content/uploads/2019/04/bus-tracking.png">
+   
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+
+
+
+    <title>CTB TRACKING</title>
+    <link rel="icon"
+        href="https://w7.pngwing.com/pngs/538/1010/png-transparent-gps-navigation-device-gps-tracking-unit-vehicle-tracking-system-icon-green-map-red-location-mark-map-logo-electronics-text-logo-thumbnail.png"
+        type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #242426;
+            min-height: 100vh;
+        }
+
+        nav {
+            width: 100%;
+            z-index: 1000;
+            /* Set a higher z-index to keep the navbar above other elements */
+        }
+
+        .content-box {
+            background: linear-gradient(45deg, #fc8332, #fccb08);
+            /* Updated gradient color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin-top: 80px;
+            /* Adjusted margin to create space below navbar */
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .navbar-brand img {
+            width: 40px;
+            height: auto;
+        }
+
+        .content-box2 {
+            background: linear-gradient(45deg, #fc8332, #fccb08);
+            /* Updated gradient color */
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            font-family: 'Arial', sans-serif;
+            text-align: left;
+            margin-top: 80px;
+            /* Adjusted margin to create space below navbar */
+            color: #fff;
+        }
+
+        .content-box2:hover {
+            background: linear-gradient(45deg, #fccb08, #fc8332);
+            /* Updated gradient color on hover */
+        }
+
+        .left-align-mobile {
+            text-align: left !important;
+        }
+
+        @media (max-width: 767px) {
+            .text-center-mobile {
+                text-align: center !important;
+            }
+        }
+
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            /* Adjusted border radius */
+            margin-top: 20px;
+            /* Added margin for spacing */
+        }
+
+        @media (max-width: 991px) {
+
+            /* Adjust font size for smaller screens */
+            h1 {
+                font-size: 50px !important;
+            }
+
+            p {
+                font-size: 16px !important;
+            }
+        }
+
+        @media (min-width: 992px) {
+
+            /* Adjust font size for larger screens */
+            h1 {
+                font-size: 70px;
+            }
+
+            p {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <!-- Replace text with image -->
+            <a class="navbar-brand" href="#"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/0d/ICBT_Campus.png" alt="Logo"></a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            </div>
+
+            <div class="d-flex">
+                <a href="firstpage.html" class="btn btn-light mx-1 btn-sm px-1 py-1">Main</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content-box" style="font-family: 'Roboto', sans-serif;">
+                    <h1 style="color:#0f0f0f">CTB BUS TRACKING SYSTEM</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <label for="busName" style="margin-top: 20px;">Bus Name:</label>
+            </div>
+            <div class="col-12">
+                <input type="text" id="busName" placeholder="Bus Details (Route: Number)"
+                    style="width: 250px; padding: 8px; border-radius: 5px; margin-bottom: 10px;">
+            </div>
+            <div class="col-12">
+                <label for="vehiclePlateNumber">Vehicle Plate Number:</label>
+            </div>
+            <div class="col-12">
+                <input type="text" id="vehiclePlateNumber" placeholder="Enter Vehicle Plate Number"
+                    style="width: 250px; padding: 8px; border-radius: 5px; margin-bottom: 10px;">
+            </div>
+            <div class="col-12">
+                <label for="driverContactNumber">Driver Contact Number:</label>
+            </div>
+            <div class="col-12">
+                <input type="text" id="driverContactNumber" placeholder="Enter Driver Contact Number"
+                    style="width: 250px; padding: 8px; border-radius: 5px; margin-bottom: 10px;">
+            </div>
+            <div class="col-12">
+                <button onclick="startSendingLocation()"
+                    style="width: 250px; padding: 10px; border-radius: 10px;">Send Location</button>
+            </div>
+        </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+
+  <script>
+    // Initialize Firebase
+    var firebaseConfig = {
+      apiKey: "AIzaSyDbdnAxeoZIcp1wrgElsKpUT4T9XwjEmZg",
+    authDomain: "icbt-project.firebaseapp.com",
+    databaseURL: "https://icbt-project-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "icbt-project",
+    storageBucket: "icbt-project.appspot.com",
+    messagingSenderId: "750388804773",
+    appId: "1:750388804773:web:25d2264e1f7ec4ea84214c"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Reference to the database
+    var database = firebase.database();
+
+    function startSendingLocation() {
+    // Get values from input fields
+    var busName = document.getElementById('busName').value;
+    var vehiclePlateNumber = document.getElementById('vehiclePlateNumber').value;
+    var driverContactNumber = document.getElementById('driverContactNumber').value;
+
+    // Validate input fields
+    if (!busName || !vehiclePlateNumber || !driverContactNumber) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    // Continuously send location data
+    function sendLocation() {
+        getCurrentLocation(function(location) {
+            if (location) {
+                console.log("Sending location:", location); // Debugging line
+
+                // Push the data to the Firebase Realtime Database
+                var locationData = {
+                    busName: busName,
+                    vehiclePlateNumber: vehiclePlateNumber,
+                    driverContactNumber: driverContactNumber,
+                    location: location,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                };
+
+                database.ref('locations').push(locationData);
+            } else {
+                console.error('Error obtaining location.');
+            }
+        });
+
+        // Send location every 5 seconds (adjust as needed)
+        setTimeout(sendLocation, 5000);
+    }
+
+    // Start sending location when the button is clicked
+    sendLocation();
+
+    // Clear data after 6 seconds
+    setTimeout(function() {
+        database.ref('locations').remove();
+        console.log('Data cleared from the database.');
+    }, 6000);
+}
+
+
+    function getCurrentLocation(callback) {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+          var location = { latitude: latitude, longitude: longitude };
+
+          callback(location); // Call the callback with the location data
+        }, function (error) {
+          console.error("Error getting location:", error);
+          callback(null);  // Pass null to indicate failure
+        });
+      } else {
+        alert('Geolocation is not supported by this browser.');
+      }
+    }
+  </script>
+</body>
+</html>

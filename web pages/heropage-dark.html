@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="CTB BUS Tracker">
+    <meta name="author" content="Group 01 - Networking Batch 03">
+    <meta property="og:title" content="CTB BUS Tracker">
+    <meta property="og:description" content="Track your CTB Bus in real-time!">
+    <meta property="og:image" content="https://www.milesight-iot.com/wp-content/uploads/2019/04/bus-tracking.png">
+    <meta name="twitter:title" content="CTB BUS Tracker">
+    <meta name="twitter:description" content="Track your CTB Bus in real-time!">
+    <meta name="twitter:image" content="https://www.milesight-iot.com/wp-content/uploads/2019/04/bus-tracking.png">
+    <meta property="og:title" content="CTB Tracking System">
+    <meta property="og:description"
+        content="Explore the CTB Bus Tracking System for real-time updates on bus locations.">
+    <meta property="og:image" content="https://www.milesight-iot.com/wp-content/uploads/2019/04/bus-tracking.png">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500&display=swap"
+        rel="stylesheet">
+
+
+
+    <title>CTB TRACKING</title>
+    <link rel="icon"
+        href="https://w7.pngwing.com/pngs/538/1010/png-transparent-gps-navigation-device-gps-tracking-unit-vehicle-tracking-system-icon-green-map-red-location-mark-map-logo-electronics-text-logo-thumbnail.png"
+        type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #242426;
+            min-height: 100vh;
+        }
+
+        nav {
+            width: 100%;
+            z-index: 1000;
+            /* Set a higher z-index to keep the navbar above other elements */
+        }
+
+        .content-box {
+            background: linear-gradient(45deg, #fc8332, #fccb08);
+            /* Updated gradient color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin-top: 80px;
+            /* Adjusted margin to create space below navbar */
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .map-box {
+            width: calc(100% - 20px);
+            /* 100% width with 10px margin on both sides */
+            border: 3px solid #fccb08;
+            /* Light yellow border */
+            border-radius: 10px;
+            /* Same radius as the container box */
+            margin-top: 16px;
+            /* Adjusted margin for spacing */
+            height: 700px;
+            /* Set a fixed height or adjust as needed */
+            margin-left: 10px;
+            /* 10px margin from the left */
+            margin-right: 10px;
+            /* 10px margin from the right */
+        }
+
+        .navbar-brand img {
+            width: 40px;
+            height: auto;
+        }
+
+        .content-box2 {
+            background: linear-gradient(45deg, #fc8332, #fccb08);
+            /* Updated gradient color */
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            font-family: 'Arial', sans-serif;
+            text-align: left;
+            margin-top: 80px;
+            /* Adjusted margin to create space below navbar */
+            color: #fff;
+        }
+
+        .content-box2:hover {
+            background: linear-gradient(45deg, #fccb08, #fc8332);
+            /* Updated gradient color on hover */
+        }
+
+        .left-align-mobile {
+            text-align: left !important;
+        }
+
+        @media (max-width: 767px) {
+            .text-center-mobile {
+                text-align: center !important;
+            }
+        }
+
+        footer {
+            background: linear-gradient(45deg, #fc8332, #fccb08);
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            /* Adjusted border radius */
+            margin-top: 20px;
+            /* Added margin for spacing */
+        }
+
+        @media (max-width: 991px) {
+
+            /* Adjust font size for smaller screens */
+            h1 {
+                font-size: 50px !important;
+            }
+
+            p {
+                font-size: 16px !important;
+            }
+        }
+
+        @media (min-width: 992px) {
+
+            /* Adjust font size for larger screens */
+            h1 {
+                font-size: 70px;
+            }
+
+            p {
+                font-size: 20px;
+            }
+        }
+
+        .search-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Ensure it's above the map */
+}
+
+.search-container input[type=text] {
+    padding: 10px;
+    width: 300px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    outline: none;
+}
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <!-- Replace text with image -->
+            <a class="navbar-brand" href="#"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/0d/ICBT_Campus.png" alt="Logo"></a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            </div>
+
+            <!-- Navbar buttons with small size and reduced margins/paddings on small screens -->
+            <div class="d-flex">
+                <a class="nav-link btn btn-dark mx-1 btn-sm px-1 py-1" href="#what-is" style="color:#edb10c">Intro</a>
+                <a class="nav-link btn btn-dark mx-1 btn-sm px-1 py-1" href="#community"
+                    style="color:#edb10c">Community</a>
+                <a class="nav-link btn btn-dark mx-1 btn-sm px-1 py-1" href="#about-us"
+                    style="color:#edb10c">About</a>
+            </div>
+
+            <!-- Add the Light and Dark buttons -->
+            <div class="d-flex">
+                <a href="firstpage.html" class="btn btn-light mx-1 btn-sm px-1 py-1">Main</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content-box" style="font-family: 'Roboto', sans-serif;">
+                    <h1 style="color:#0f0f0f">CTB BUS TRACKING SYSTEM</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div></div>
+
+    <!-- Search bar section -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search by Bus Name" onkeypress="searchOnEnter(event)">
+        <button id="searchButton" onclick="searchBus()">Search</button>
+    </div>
+    
+
+     <!-- Empty box for the map with light yellow border -->
+    <div class="map-box" id="map"></div>
+
+    <div class="container" id="what-is">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box2">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-left">
+                            <h4 class="left-align-mobile" style="color:#333333; font-family: 'Roboto', sans-serif;">What
+                                is</h4>
+                            <h1 class="text-center-mobile"
+                                style="font-size:70px;color:#0f0f0f; font-family: 'Roboto', sans-serif;">CTB TRACKER
+                            </h1>
+                        </div>
+                        <div class="col-md-6">
+                            <p style="color:#333333; font-size:20px; font-family: 'Roboto', sans-serif;">Introducing our
+                                cutting-edge
+                                CTB Bus Tracking System - your perfect commuting companion! Say goodbye to bus stop
+                                uncertainty and long waits. Our technology is designed to deliver real-time information
+                                on bus locations, expected arrival times, and even the type of buses available - whether
+                                air-conditioned or not - assuring a comfortable travel every time.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="community">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box2">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-left">
+
+                            <h1 class="text-center-mobile"
+                                style="font-size:70px;color:#0f0f0f; font-family: 'Roboto', sans-serif;">COMMUNITY
+                            </h1>
+                            <p style="color:#333333; font-size:20px; font-family: 'Roboto', sans-serif;">🌐 Welcome to
+                                our vibrant
+                                community!
+                                We value your opinion and invite you to
+                                be a part of our growing network. Your insights
+                                and feedback are crucial in helping us improve
+                                and enhance your experience.
+                            </p>
+
+                        </div>
+                        <div class="col-md-6">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="comment" class="form-label">Comment</label>
+                                    <textarea class="form-control" id="comment" name="comment" rows="3"
+                                        required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="about-us">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content-box2">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-left">
+                            <img src="https://wallpapercave.com/wp/wp8107950.jpg" alt="Image of our team"
+                                class="content-image">
+                        </div>
+                        <div class="col-md-6 text-center text-md-left">
+                            <h1 class="text-center-mobile"
+                                style="font-size:70px;color:#0f0f0f; font-family: 'Roboto', sans-serif;">ABOUT US
+                            </h1>
+                            <p style="color:#333333; font-size:20px; font-family:'Roboto', sans-serif;">Welcome to
+                                Networking 03/ICBT
+                                where develop the CTB Bus Tracking System. Our journey
+                                began with a vision to give reliable service to the country. Since 2024,
+                                we've been committed to make every CTB bus tracked and creating real-time platform for
+                                you.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY4YzE3qihFJq4QtxlE+Ia7MvGVoNEmIa06D2m"
+        crossorigin="anonymous"></script>
+
+    <!-- Load the Google Maps JavaScript API with your API key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAP_API_KEY=initMap"
+        async defer></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAP_API_KEY" async defer></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+  <script>
+    // Initialize Firebase
+    var firebaseConfig = {
+      apiKey: "AIzaSyDbdnAxeoZIcp1wrgElsKpUT4T9XwjEmZg",
+    authDomain: "icbt-project.firebaseapp.com",
+    databaseURL: "https://icbt-project-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "icbt-project",
+    storageBucket: "icbt-project.appspot.com",
+    messagingSenderId: "750388804773",
+    appId: "1:750388804773:web:25d2264e1f7ec4ea84214c"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Reference to the database
+    var database = firebase.database();
+
+    function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 7.2906, lng: 80.6337 },
+        zoom: 13
+    });
+
+    // Reference to the 'locations' node in the database
+    var locationsRef = database.ref('locations');
+
+    locationsRef.on('child_added', function (snapshot) {
+        var locationData = snapshot.val();
+        console.log("Location Data:", locationData);
+
+        // Check if latitude and longitude are numbers
+        if (
+            typeof locationData.location !== 'undefined' &&
+            typeof locationData.location.latitude === 'number' &&
+            typeof locationData.location.longitude === 'number'
+        ) {
+            var LatLngLiteral = {
+                lat: locationData.location.latitude,
+                lng: locationData.location.longitude
+            };
+
+            var marker = new google.maps.Marker({
+                position: LatLngLiteral,
+                map: map,
+                title: locationData.busName
+            });
+
+            // Add a click event listener to the marker
+            marker.addListener('click', function () {
+                // Display alert with bus details
+                alert('Bus Details:\n' +
+                    'Bus Name: ' + locationData.busName + '\n' +
+                    'Vehicle Plate Number: ' + locationData.vehiclePlateNumber + '\n' +
+                    'Driver Contact Number: ' + locationData.driverContactNumber);
+            });
+
+            console.log("Marker added:", marker);
+        } else {
+            console.error("Invalid latitude or longitude in location data:", locationData);
+        }
+    });
+}
+
+// Function to search for buses when Enter key is pressed
+function searchOnEnter(event) {
+    if (event.key === 'Enter') {
+        searchBus();
+    }
+}
+
+// Function to search for buses
+function searchBus() {
+    var searchInput = document.getElementById('searchInput').value.toLowerCase().trim();
+
+    // Reference to the 'locations' node in the database
+    var locationsRef = database.ref('locations');
+
+    // Query the Firebase database for the latest bus information
+    locationsRef.orderByChild('timestamp').limitToLast(1).once('value', function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            var locationData = childSnapshot.val();
+            var busName = locationData.busName.toLowerCase();
+
+            // Check if the bus name matches the search input
+            if (busName.includes(searchInput)) {
+                // Highlight the matching marker on the map
+                highlightMarker(locationData);
+
+                // Display an alert indicating the bus is on the way
+                alert('Bus is on the way');
+            }
+        });
+    });
+}
+
+// Function to highlight the marker of the matching bus
+function highlightMarker(locationData) {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 7.2906, lng: 80.6337 },
+        zoom: 13
+    });
+
+    // Create a LatLngLiteral for the matching bus location
+    var LatLngLiteral = {
+        lat: locationData.location.latitude,
+        lng: locationData.location.longitude
+    };
+
+    // Create a marker for the matching bus
+    var marker = new google.maps.Marker({
+        position: LatLngLiteral,
+        map: map,
+        title: locationData.busName
+    });
+
+    // Pan the map to the marker position
+    map.panTo(LatLngLiteral);
+
+    // Add a click event listener to the marker
+    marker.addListener('click', function () {
+        // Display alert with bus details
+        alert('Bus Details:\n' +
+            'Bus Name: ' + locationData.busName + '\n' +
+            'Vehicle Plate Number: ' + locationData.vehiclePlateNumber + '\n' +
+            'Driver Contact Number: ' + locationData.driverContactNumber);
+    });
+}
+
+
+  </script>
+
+</body>
+
+</html>
