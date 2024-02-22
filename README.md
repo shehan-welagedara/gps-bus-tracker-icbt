@@ -37,10 +37,8 @@ The CTB Bus Tracking System involves the following hardware components:
 
 1. **GPS Module**: Installed in each CTB bus to track its real-time location.
 2. **Microcontroller**: Controls the operation of the GPS module and interfaces with other hardware components.
-3. **GSM/GPRS Module**: Enables communication between the microcontroller and the central server using cellular networks.
-4. **Power Supply**: Provides electrical power to the GPS module, microcontroller, and GSM/GPRS module.
-5. **Antenna**: Connected to the GSM/GPRS module to enhance signal reception for reliable communication.
-6. **Enclosure**: Houses the hardware components and protects them from environmental factors such as dust, moisture, and vibration.
+3. **Power Supply**: Provides electrical power to the GPS module, microcontroller, and GSM/GPRS module.
+4. **Enclosure**: Houses the hardware components and protects them from environmental factors such as dust, moisture, and vibration.
 
 ## Technologies Used
 
@@ -50,8 +48,6 @@ The CTB Bus Tracking System involves the following hardware components:
 - **Bootstrap 5**: For responsive design and layout.
 - **Google Maps JavaScript API**: For integrating interactive maps and displaying bus locations.
 - **Firebase Realtime Database**: For storing and retrieving bus location data in real-time.
-- **Firebase Authentication**: For user authentication and access control.
-- **Firebase Hosting**: For deploying and hosting the web application.
 
 ## Getting Started
 
